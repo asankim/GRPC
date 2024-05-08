@@ -17,7 +17,7 @@ export interface Todo {
 }
 
 export interface Todos {
-  Todoed: Todo[];
+  Todos: Todo[];
 }
 
 export interface PostTodoDTO {
@@ -31,20 +31,20 @@ export interface Empty {
 export const TODO_PACKAGE_NAME = "todo";
 
 export interface TodoServiceClient {
-  posstTodo(request: PostTodoDTO): Observable<Todo>;
+  postTodo(request: PostTodoDTO): Observable<Todo>;
 
   getTodos(request: Empty): Observable<Todos>;
 }
 
 export interface TodoServiceController {
-  posstTodo(request: PostTodoDTO): Promise<Todo> | Observable<Todo> | Todo;
+  postTodo(request: PostTodoDTO): Promise<Todo> | Observable<Todo> | Todo;
 
   getTodos(request: Empty): Promise<Todos> | Observable<Todos> | Todos;
 }
 
 export function TodoServiceControllerMethods() {
   return function (constructor: Function) {
-    const grpcMethods: string[] = ["posstTodo", "getTodos"];
+    const grpcMethods: string[] = ["postTodo", "getTodos"];
     for (const method of grpcMethods) {
       const descriptor: any = Reflect.getOwnPropertyDescriptor(constructor.prototype, method);
       GrpcMethod("TodoService", method)(constructor.prototype[method], method, descriptor);
